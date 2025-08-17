@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <script src="/Cesium/Cesium.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="cesiumContainer"></div>
+      <!-- 色卡 -->
+      <div id="colorScale"></div>
+    </div>
+
+    <script>
+      var CONFIG = {
+        // 服务器地址配置
+        SERVERS: {
+          // 图像服务地址
+          IMAGERY_BASE_URL: "https://tiles2.geovisearth.com",
+          // 数据API服务地址
+          DATA_API_BASE_URL: "http://192.168.3.250:8880",
+          DATA_API_BASE_URL_GLYPHS: "http://localhost:4000",
+          // 地形服务地址
+          TERRAIN_BASE_URL: "http://localhost:5179",
+        },
+
+        // 服务端点配置
+        ENDPOINTS: {
+          // 图像瓦片服务
+          IMAGERY_TILES:
+            "/base/v1/img/{z}/{x}/{y}?format=webp&token=76fdda0f0b43f205c697d38252d1822cb2faa7ba920382634895e64c7cd44cb6",
+          // 3D数据获取接口 (温度、盐度)
+          WEB3D_DATA: "/hyhjfx/web3d/getWeb3DData1",
+          // 海洋流场数据接口
+          OCEAN_CURRENT_DATA: "/hyhjfx/web3d/getOceanCurrentData",
+          // 风场数据接口
+          WIND_SPEED_DATA: "/hyhjfx/web3d/getWindData",
+          // 地形瓦片服务
+          TERRAIN_TILES: "/worldTerrain/",
+          // 底质瓦片服务
+          DB_DECK_TILES: "/hyhjfx/api/dbdeck/tiles/{z}/{x}/{y}.pbf",
+          // 字体瓦片服务
+          GLYPHS: "/feature3d/fonts/{fontstack}/{range}.pbf",
+        },
+
+        // 渲染参数配置
+        RENDERING: {
+          // 垂直夸张倍数
+          VERTICAL_EXAGGERATION: 50,
+          // 边界采样点数量
+          BOUNDARY_SAMPLE_COUNT: 60,
+          // 墙体最小高度
+          WALL_MIN_HEIGHT: -10000,
+        },
+
+        // 缓存class
+        CACHE_CLASS: {
+          classIdsByTemperature: [],
+          classIdsBySalinity: [],
+          classIdsByVelocity: [],
+          classIdsByWindSpeed: [],
+        },
+
+        // 数据缓存
+        DATA_CACHE: {
+          temperature: null,
+          salinity: null,
+          velocity: null,
+          windSpeed: null,
+        },
+
+        // 数据请求配置
+        DATA_REQUEST: {
+          type: "hycom",
+          featureType: "temperature",
+          minLon: 127.94577884448529,
+          maxLon: 135.45008980854757,
+          minLat: 18.740412919807163,
+          maxLat: 25.31853379888154,
+        },
+
+        // HTTP请求配置
+        HTTP: {
+          HEADERS: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "Get,POST,PUT,DELETE,OPTIONS",
+          },
+          RETRY_ATTEMPTS: 3,
+        },
+      };
+    </script>
+    <script type="module" src="/src/main.js"></script>
+
+    <script src="ThirdParty/SvgPathBindingHandler.js"></script>
+    <script src="ThirdParty/knockout-3.5.1.js"></script>
+    <script src="ThirdParty/knockout-es5.js"></script>
+    <script src="ThirdParty/knockout.js"></script>
+    <script src="voxelInspector/InspectorShared.js"></script>
+    <script src="voxelInspector/VoxelInspectorViewModel.js"></script>
+    <script src="voxelInspector/VoxelInspector.js"></script>
+    <script src="voxelInspector/viewerVoxelInspectorMixin.js"></script>
+  </body>
+</html>
