@@ -1,5 +1,5 @@
 # oceanEnv
-基于Cesium + shader 编程实现的三维流体渲染，真实模拟海洋洋流、低空风等流动动画。
+基于Cesium + shader 编程实现的三维流体渲染，真实模拟海洋洋流、低空风等流动动画以及海洋海水三维体渲染效果。
 
 ### 读取NC文件  需要包含以下参数
 defaultFields = {
@@ -24,3 +24,5 @@ defaultFields = {
   dynamic: true // 是否动态运行
 
   版本支持webgl2
+
+### 具体效果查看 流体、温度体渲染截图
